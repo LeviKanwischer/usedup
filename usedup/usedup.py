@@ -34,7 +34,7 @@ class UsedUp(object):
 
     def __init__(self):
         self.admin_url = URL + '/admin/queries/?type={type}&period={period}'
-        self.query_url = URL + '/query/{qid}/'
+        self.query_url = URL + '/query/{query_id}/'
         self.periods = {'1wk': 1, '2wk': 2, '1mt': 3, '2mt': 4, '3mt': 5}
         self.auth = get_credentials()
 
@@ -58,12 +58,11 @@ class UsedUp(object):
             downloads = os.path.expanduser('~/downloads')
             outfile = os.path.join(downloads, 'usedup_{}.csv'.format(period))
 
-        p_id = self.periods[period]
-        url = self.admin_url.format(type='completed', period=p_id)
+        period = self.periods[period]
+        url = self.admin_url.format(type='completed', period=period)
         self._check_server(url)
 
-        request = requests.get(url, auth=self.auth)
-        results = request.json()
+        results = requests.get(url, auth=self.auth).json()
         header = sorted([field for field in results[0]], key=str.lower)
         with open(outfile, 'w') as f_out:
             writer = csv.DictWriter(f_out, lineterminator='\n', fieldnames=header)
@@ -109,7 +108,7 @@ class UsedUp(object):
 
     def kill(self, query_id):
         """Kill actively running query."""
-        url = self.query_url.format(qid=query_id)
+        url = self.query_url.format(query_id=query_id)
         self._check_server(url)
 
         request = requests.delete(url, auth=self.auth)
