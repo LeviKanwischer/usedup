@@ -18,4 +18,5 @@ See the README.txt for further details.
 
 __title__ = 'usedup'
 __version__ = '1.0.0a1'
+__license__ = 'MIT'
 __author__ = 'Levi Kanwischer'
