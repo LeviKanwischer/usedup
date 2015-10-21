@@ -7,7 +7,7 @@ import usedup
 
 
 def _load(filename):
-    """Loads file contents from package base path."""
+    """Load file contents from package base path."""
     base = os.path.dirname(os.path.abspath(__file__))
     loadfile = os.path.join(base, filename)
     with open(loadfile, 'r') as f_in:
