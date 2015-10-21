@@ -30,7 +30,7 @@ classifiers = [
     ]
 
 
-setup(name='usedup',
+setup(name=usedup.__title__,
       version=usedup.__version__,
       description='Basic Datamine Admin Tools',
       long_description=readme,
