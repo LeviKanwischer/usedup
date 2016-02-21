@@ -11,33 +11,28 @@ This module contains the logic for running the upsight admin functions.
 
 See the README for further details.
 """
+from __future__ import print_function
 
-import os
-import sys
-import re
 import csv
 import getpass
+import os
+import re
+import sys
+
 import requests
 
-
-URL = 'https://analytics.upsight.com/dashboard/datamine2'
-
-
-def get_credentials():
-    """Get & Encode credentials for Upsight authorization."""
-    username = input('Upsight Username: ')
-    password = getpass.getpass('Upsight Password: ')
-    return requests.auth.HTTPBasicAuth(username, password)
+from .utils import Auth
 
 
 class UsedUp(object):
     """Maintain logic for running Upsight admin tasks."""
+    URL = r'https://analytics.upsight.com/dashboard/datamine2'
 
     def __init__(self):
-        self.admin_url = URL + '/admin/queries/?type={type}&period={period}'
-        self.query_url = URL + '/query/{query_id}/'
+        self.auth = requests.auth.HTTPBasicAuth(Auth().username, Auth().password)
+        self.admin_url = self.URL + '/admin/queries/?type={type}&period={period}'
+        self.query_url = self.URL + '/query/{query_id}/'
         self.periods = {'1wk': 1, '2wk': 2, '1mt': 3, '2mt': 4, '3mt': 5}
-        self.auth = get_credentials()
 
     def _check_server(self, url):
         """Verify access to Upsight, provide logic on Fail."""
@@ -57,7 +52,7 @@ class UsedUp(object):
 
         if not outfile:
             downloads = os.path.expanduser('~/downloads')
-            outfile = os.path.join(downloads, 'usedup_{}.csv'.format(period))
+            outfile = os.path.join(downloads, 'usedup_%s.csv' % period)
 
         period = self.periods[period]
         url = self.admin_url.format(type='completed', period=period)
@@ -114,7 +109,7 @@ class UsedUp(object):
 
         request = requests.delete(url, auth=self.auth)
         if request.status_code == 204:
-            print('QueryID {} killed successfully.'.format(query_id))
+            print('QueryID %s killed successfully.' % query_id)
 
     def details(self, query_id, detail, query):
         """Return details about active query."""
