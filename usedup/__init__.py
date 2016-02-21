@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Basic Datamine Admin Tools
+Datamine (Upsight.com) CLI Admin Tools
 
 usedup is a simple command line tool for performing basic admin tasks
 using both official and unofficial datamine api's. At present this allows
@@ -13,10 +13,15 @@ credentials will be asked upon submitting each command.
     USAGE:
     $ usedup --help
 
-See the README.txt for further details.
+See the README for further details.
 """
 
+from .upsight import UsedUp
+
+
 __title__ = 'usedup'
-__version__ = '1.0.0a1'
-__license__ = 'MIT'
+__version__ = '1.0.0b1'
 __author__ = 'Levi Kanwischer'
+__copyright__ = 'Copyright (c) 2016 Levi Kanwischer'
+__license__ = 'MIT'
+__all__ = ['UsedUp']
