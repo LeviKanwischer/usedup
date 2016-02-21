@@ -11,6 +11,7 @@ This module contains the logic for running the upsight admin functions.
 
 See the README for further details.
 """
+# TODO: Replace printing & downloading w/ sys.stdout streams
 from __future__ import print_function
 
 import csv
@@ -47,6 +48,7 @@ class UsedUp(object):
 
     def history(self, period, outfile):
         """Download an archive of previously run queries."""
+        # TODO: Update format handling (see alt version) & remove `download`
         if period not in self.periods:
             period = '1wk'
 
@@ -67,6 +69,7 @@ class UsedUp(object):
 
     def running(self):
         """Return list of currently running queries."""
+        # TODO: Look into pretty console printing modules for formatting
         url = self.admin_url.format(type='running', period=1)
         self._check_server(url)
 
@@ -113,7 +116,7 @@ class UsedUp(object):
 
     def details(self, query_id, detail, query):
         """Return details about active query."""
-        # TODO: Optimize and make this printing 'pretty'
+        # TODO: Optimize and make this printing 'pretty' <- This!
         url = self.admin_url.format(type='running', period=1)
         self._check_server(url)
 
