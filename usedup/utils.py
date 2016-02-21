@@ -25,7 +25,7 @@ class Auth(object):
     # username & password.
 
     def __init__(self):
-        self.usedup = os.path.expanduser('~/.usedup')
+        self.usedup = os.path.expanduser('~/.usedup.ini')
         self.config = self._load_config()
         self._validate_file()
         self.username = self.config['upsight']['username']
@@ -34,15 +34,15 @@ class Auth(object):
     def _load_config(self):
         """Load & return config file."""
         config = ConfigParser()
-        return config.read(self.usedup)
+        config.read(self.usedup)
+        return config
 
     def _validate_file(self):
         """Verify credential file exists, create if missing."""
-        if not 'upsight' in self.config:
+        if 'upsight' not in self.config:
             self.config['upsight'] = {}
-            self.config['elapsed']['username'] = input('Enter Username: ')
+            self.config['upsight']['username'] = input('Enter Username: ')
             self.config['upsight']['password'] = getpass('Enter Password: ')
 
         with open(self.usedup, 'w') as configfile:
-            configfile.write(self.config)
-
+            self.config.write(configfile)
