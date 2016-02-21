@@ -11,12 +11,12 @@ This module contains the logic for running the upsight admin functions.
 
 See the README for further details.
 """
+from __future__ import print_function
 
 import csv
 import getpass
 import os
 import re
-import sys
 
 import requests
 from requests.auth import HTTPBasicAuth
@@ -29,14 +29,15 @@ class UsedUp(object):
     _URL = r'https://analytics.upsight.com/dashboard/datamine2'
 
     def __init__(self):
-        self.auth = HTTPBasicAuth(Auth().username, Auth().password)
+        _auth = Auth()
+        self.auth = HTTPBasicAuth(_auth.username, _auth.password)
         self.ADMIN = self._URL + '/admin/queries/?type=%(type)s&period=%(period)s'
         self.QUERY = self._URL + '/query/%(qid)s/'
 
     def _check_server(self, url):
         """Verify user has access to Upsight."""
         request = requests.get(url, auth=self.auth)
-        if request.status_code != requests.status_code.ok:
+        if request.status_code != requests.codes.ok:
             raise Error('Invalid Server Response: %s' % request.status_code)
 
     def history(self, period):
@@ -67,8 +68,8 @@ class UsedUp(object):
         results = requests.get(url, auth=self.auth).json()
 
         column_spaces = [i + ' '*(column_max-len(i)) for i in columns]
-        sys.stdout.write(join_object.join(column_spaces))
-        sys.stdout.write('-'*len(join_on.join(column_spaces)))
+        print(join_on.join(column_spaces))
+        print('-'*len(join_on.join(column_spaces)))
 
         for result in results:
             user = result['user_name']
@@ -90,7 +91,7 @@ class UsedUp(object):
                     column = column[:column_max-4] + '...'
                 column = column + ' '*(column_max-len(column))
                 row_spaces.append(column)
-            sys.stdout.write(join_object.join(row_spaces))
+            print(join_on.join(row_spaces))
 
     def kill(self, qid):
         """Cancel active query.
@@ -101,8 +102,8 @@ class UsedUp(object):
         self._check_server(url)
 
         request = requests.delete(url, auth=self.auth)
-        if request.status_code == requests.status_code.no_content:
-            sys.stdout.write('QueryID %s killed successfully.' % qid)
+        if request.status_code == requests.codes.no_content:
+            print('QueryID %s killed successfully.' % qid)
 
     def details(self, qid, detail, query):
         """View active query details.
@@ -119,6 +120,6 @@ class UsedUp(object):
         if detail and result:
             for item in result:
                 if item != 'query':
-                    sys.stdout.write(item.capitalize(), '==', result[item])
+                    print(item.capitalize(), '==', result[item])
         if query and result['query']:
-            sys.stdout.write('Query', '\n\n', result['query'])
+            print('Query', '\n\n', result['query'])
