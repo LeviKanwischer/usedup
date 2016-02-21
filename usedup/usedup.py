@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 
 """
-usedup.usedup
--------------
+usedup.upsight
+--------------
 
 This module contains the logic for running the upsight admin functions.
 
     USAGE:
-    >>> usedup.usedup.UsedUp
+    >>> usedup.upsight.UsedUp
 
-See the README.txt for further details.
+See the README for further details.
 """
 
 import os

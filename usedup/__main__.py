@@ -1,14 +1,32 @@
 # -*- coding: utf-8 -*-
 
+"""
+Datamine (Upsight.com) CLI Admin Tools
+
+usedup is a simple command line tool for performing basic admin tasks
+using both official and unofficial datamine api's. At present this allows
+for; checking currently running queries, viewing a running queries stats,
+killing active queries, and/or downloading an archive of historicly run
+queries. Since login is required to access datamine(upsight.com), user
+credentials will be asked upon submitting each command.
+
+    USAGE:
+    $ usedup --help
+
+See the README for further details.
+"""
+
 import time
+
 import click
-from usedup.usedup import UsedUp
+
+import usedup
 
 
 @click.group()
 def cli():
     """
-    Basic Datamine Admin Tools
+    Datamine (Upsight.com) CLI Admin Tools
 
     usedup is a simple command line tool for performing basic admin tasks
     using both official and unofficial datamine api's. At present this allows
@@ -17,7 +35,10 @@ def cli():
     queries. Since login is required to access datamine(upsight.com), user
     credentials will be asked upon submitting each command.
 
-    See the README.txt for further details.
+        USAGE:
+        $ usedup --help
+
+    See the README for further details.
     """
     pass
 
