@@ -18,11 +18,11 @@ import os
 
 
 class Auth(object):
-    """Handle Upsight credential interactions."""
+    """Upsight credential interactions."""
     # TODO: Research getter/setter's, as well as properties. Need to allow
     # for external file updating mid-process. This should suffice for now
     # being that a missing file will update `self.config` before assigning
-    # username & password
+    # username & password.
 
     def __init__(self):
         self.usedup = os.path.expanduser('~/.usedup')
@@ -39,10 +39,10 @@ class Auth(object):
     def _validate_file(self):
         """Verify credential file exists, create if missing."""
         if not 'upsight' in self.config:
-            config['upsight'] = {}
-            config['elapsed']['username'] = input('Enter Username: ')
-            config['upsight']['password'] = getpass('Enter Password: ')
+            self.config['upsight'] = {}
+            self.config['elapsed']['username'] = input('Enter Username: ')
+            self.config['upsight']['password'] = getpass('Enter Password: ')
 
         with open(self.usedup, 'w') as configfile:
-            configfile.write(config)
+            configfile.write(self.config)
 

@@ -18,12 +18,11 @@
 
 OVERVIEW
 ''''''''
-usedup is a simple command line tool for performing basic admin tasks
-using both official and unofficial datamine api's. At present this allows
-for; checking currently running queries, viewing a running queries stats,
-killing active queries, and/or downloading an archive of historicly run
-queries. Since login is required to access datamine(upsight.com), user
-credentials will be asked upon submitting each command.
+usedup is a simple command line tool for performing basic admin tasks.
+At present this allows for; checking currently running queries, viewing
+a running queries stats, killing active queries, and/or extracting user
+run query archives. Since login is required to access Upsight.com, user
+credentials are stored in plain test in a ~/.usedup.ini file.
 
 
 USAGE
