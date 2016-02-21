@@ -20,7 +20,7 @@ import time
 
 import click
 
-import usedup
+from usedup import UsedUp
 
 
 @click.group()
@@ -50,11 +50,8 @@ def history(period='1wk', outfile=None):
     """Download an archive of previously run queries.
 
     Period Options:
-    1wk=='1 week';
-    2wk=='2 weeks';
-    1mt=='1 month';
-    2mt=='2 months';
-    3mt=='3 months'
+
+    1wk=='1 week'; 2wk=='2 weeks'; 1mt=='1 month'; 2mt=='2 months'; 3mt=='3 months'
 
     Output File: Saves to downloads if missing.
     """
@@ -84,8 +81,8 @@ def kill(query_ids):
 
 @cli.command()
 @click.argument('query_ids', nargs=-1)
-@click.option('--detail/--no-detail', default=True, help='Show detail (Y|N)')
-@click.option('--query/--no-query', default=True, help='Show SQL (Y|N)')
+@click.option('--detail/--no-detail', default=True, help='Show detail (Y/n)')
+@click.option('--query/--no-query', default=True, help='Show SQL (Y/n)')
 def details(query_ids, detail, query):
     """Print details about active query Upsight's Query ID."""
     usedup = UsedUp()
