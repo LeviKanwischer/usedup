@@ -9,7 +9,7 @@
                                                    _/             
 
 
-*Upsight.com CLI Admin Tools*
+*Datamine (Upsight.com) CLI Admin Tools*
 
 
 .. image:: https://img.shields.io/pypi/v/usedup.svg
