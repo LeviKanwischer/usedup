@@ -29,7 +29,16 @@ USAGE
 '''''
 .. code-block:: bash
 
-    $ usedup --help
+    Usage: usedup [OPTIONS] COMMAND [ARGS]...
+
+    Options:
+        --help  Show this message and exit.
+
+    Commands:
+        details  View active query details.
+        history  Extract past user queries.
+        kill     Cancel active query.
+        running  Currently running queries.
 
 
 INSTALL
