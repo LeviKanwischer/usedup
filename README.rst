@@ -19,7 +19,7 @@ usedup is a simple command line tool for performing basic admin tasks using both
 
 USAGE
 '''''
-.. code-block:: bash
+.. code-block::
 
     Usage: usedup [OPTIONS] COMMAND [ARGS]...
 
