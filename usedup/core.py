@@ -13,6 +13,7 @@ import csv
 import getpass
 import logging
 import math
+import os
 import re
 import time
 
@@ -30,8 +31,8 @@ class UsedUp(object):
 
     Parameters
     ----------
-    configpath : str, optional (default='~/.usedup')
-        Path to config file w/ login credentials.
+        configpath : str, optional (default=None)
+            Path to config file w/ login credentials.
 
     Attributes
     ----------
@@ -56,7 +57,7 @@ class UsedUp(object):
     ADMIN = r'/admin/queries/?type=%(type)s&period=%(period)s'
     QUERY = r'/query/%(qid)s/'
 
-    def __init__(self, configpath='~/.usedup'):
+    def __init__(self, configpath=None):
         self._classname = type(self).__name__
         self.logger = logging.getLogger(self._classname)
 
@@ -64,12 +65,12 @@ class UsedUp(object):
         self.session.auth = self._acquire_user_credentials(configpath)
 
     @staticmethod
-    def _acquire_user_credentials(configpath='~/.usedup'):
+    def _acquire_user_credentials(configpath=None):
         """Acquire user credentials for DataMine access.
 
         Parameters
         ----------
-        configpath : str, optional (default='~/.usedup')
+        configpath : str, optional (default=None)
             Path to config file w/ login credentials.
 
         Returns
@@ -78,8 +79,12 @@ class UsedUp(object):
             Authentication object w/ user credential from `requests` package.
 
         """
+        userconfig = os.path.expanduser('~/.usedup')
         config = ConfigParser()
-        config.read(configpath)
+        config.read(userconfig)
+
+        if configpath is not None:
+            config.read(configpath)
 
         if 'upsight' not in config.sections():
             config['upsight'] = {}
