@@ -31,8 +31,8 @@ class UsedUp(object):
 
     Parameters
     ----------
-        configpath : str, optional (default=None)
-            Path to config file w/ login credentials.
+    configpath : str, optional (default=None)
+        Path to config file w/ login credentials.
 
     Attributes
     ----------
