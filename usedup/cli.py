@@ -94,8 +94,8 @@ def running(continuous, pause):
 
 @main.command()
 @click.argument('qids', nargs=-1)
-@click.option('--no-details', '-nd', is_flag=False, help='Exclude processing details.')
-@click.option('--no-query', '-nq', is_flag=False, help='Exclude query string.')
+@click.option('--details/--no-details', default=True, help='Show processing details?')
+@click.option('--query/--no-query', default=True, help='Show query statement?')
 def status(qids, details, query):
     """Print details about active query Upsight's Query ID."""
     with UsedUp() as usedup:
