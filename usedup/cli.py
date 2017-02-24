@@ -88,7 +88,8 @@ def running(continuous, pause):
             tabbed = tabulate(queries, headers='keys', tablefmt="grid")
             print(tabbed)
             showresults = continuous
-            time.sleep(pause)
+            if showresults:
+                time.sleep(pause)
 
 
 @main.command()
