@@ -16,6 +16,7 @@ import math
 import os
 import re
 import time
+from collections import OrderedDict
 
 try:
     from configparser import ConfigParser
@@ -299,7 +300,7 @@ class UsedUp(object):
 
         queries = []
         for result in results:
-            query = {}
+            query = OrderedDict()
             query['User Name'] = result['user_name']
             query['Email Domain'] = re.sub('^[^@]+@', '', result['user_email'])
             query['Query Type'] = result['type']
