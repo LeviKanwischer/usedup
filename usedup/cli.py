@@ -85,7 +85,7 @@ def running(continuous, pause):
     with UsedUp() as usedup:
         while showresults:
             queries = usedup.running()
-            tabbed = tabulate(queries, tablefmt="grid")
+            tabbed = tabulate(queries, headers='keys', tablefmt="grid")
             print(tabbed)
             showresults = continuous
             time.sleep(pause)
